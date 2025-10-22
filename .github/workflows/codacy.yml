@@ -1,0 +1,29 @@
+name: Codacy Analysis
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  codacy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@v4
+        with:
+          output: results.sarif
+          format: sarif
+          directory: .
+          verbose: true
+          upload: false
+
+      - name: Upload SARIF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: codacy-sarif
+          path: results.sarif
