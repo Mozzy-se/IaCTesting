@@ -18,7 +18,7 @@ jobs:
         with:
           output: results.sarif
           format: sarif
-          directory: .
+          directory: ${{ github.workspace }}
           verbose: true
           upload: false
 
